@@ -1,21 +1,21 @@
-import { MIME_BMP, MIME_JPEG, MIME_PNG } from '../mime.js';
-import { PNG } from 'pngjs';
-import bmp from '@jimp/bmp';
-import { fileTypeFromBuffer } from 'file-type';
-import jpeg from 'jpeg-js';
+'use strict';
 
-const Jimp = bmp();
+const FileType = require('file-type');
+const bmp = require('bmp-js');
+const jpeg = require('jpeg-js');
+const { MIME_BMP, MIME_JPEG, MIME_PNG } = require('../mime');
+const { PNG } = require('pngjs');
 
 const decoders = {
-  [MIME_BMP]: buffer => Jimp.decoders[MIME_BMP](buffer),
-  [MIME_JPEG]: buffer => jpeg.decode(buffer),
-  [MIME_PNG]: buffer => PNG.sync.read(buffer)
+  [MIME_BMP]: bmp.decode,
+  [MIME_JPEG]: jpeg.decode,
+  [MIME_PNG]: PNG.sync.read
 };
 
 const encoders = {
-  [MIME_BMP]: imageData => Jimp.encoders[MIME_BMP]({ bitmap: imageData }),
+  [MIME_BMP]: imageData => bmp.encode(imageData).data,
   [MIME_JPEG]: imageData => jpeg.encode(imageData).data,
-  [MIME_PNG]: imageData => PNG.sync.write(imageData)
+  [MIME_PNG]: PNG.sync.write
 };
 
 const Image = {
@@ -28,7 +28,7 @@ const Image = {
    */
   async decode (arrayBuffer) {
     const buffer = Buffer.from(arrayBuffer);
-    const { mime } = await fileTypeFromBuffer(buffer) || {};
+    const { mime } = await FileType.fromBuffer(buffer) || {};
     if (!(mime in decoders)) {
       throw new TypeError(`${mime} is not supported`);
     }
@@ -64,4 +64,4 @@ const Image = {
   }
 };
 
-export default Image;
+module.exports = Image;

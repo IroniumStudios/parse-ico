@@ -1,6 +1,7 @@
 {
   "extends": [
-    "@egy186/eslint-config"
+    "@egy186/eslint-config",
+    "@egy186/eslint-config/node"
   ],
   "ignorePatterns": [
     "coverage",
@@ -18,8 +19,13 @@
         "hljs": true
       },
       "rules": {
-        "import/unambiguous": "off",
-        "no-console": "off"
+        "func-names": "off",
+        "no-console": "off",
+        "no-var": "off",
+        "prefer-arrow-callback": "off",
+        "prefer-template": "off",
+        "strict": "off",
+        "vars-on-top": "off"
       }
     },
     {
@@ -39,7 +45,8 @@
       ],
       "rules": {
         "@stylistic/array-element-newline": "off",
-        "no-unused-expressions": "off"
+        "no-unused-expressions": "off",
+        "n/no-sync": "off"
       }
     }
   ],

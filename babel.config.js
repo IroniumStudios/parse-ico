@@ -1,3 +1,8 @@
-const config = { presets: [['@babel/preset-env', { exclude: ['babel-plugin-transform-async-to-generator', 'babel-plugin-transform-regenerator'] }]] };
+'use strict';
 
-export default config;
+const config = {
+  plugins: ['transform-async-to-promises'],
+  presets: ['@babel/preset-env']
+};
+
+module.exports = config;

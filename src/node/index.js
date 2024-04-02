@@ -1,7 +1,9 @@
-import Image from './image.js';
-import { MIME_PNG } from '../mime.js';
-import { isICO } from '../is-ico.js';
-import { parse } from '../parse.js';
+'use strict';
+
+const Image = require('./image');
+const isICO = require('../is-ico');
+const parseICO = require('../parse');
+const { MIME_PNG } = require('../mime');
 
 /**
  * Parse ICO and return some images.
@@ -11,16 +13,14 @@ import { parse } from '../parse.js';
  * @param {string} [mime=image/png] - MIME type for output.
  * @returns {Promise<ParsedImage[]>} Resolves to an array of {@link ParsedImage}.
  */
-const parseICO = (buffer, mime = MIME_PNG) => parse(buffer, mime, Image);
+const parse = (buffer, mime = MIME_PNG) => parseICO(buffer, mime, Image);
 
 /**
  * @module ICO
  */
 const ICO = {
   isICO,
-  parseICO
+  parse
 };
 
-export { isICO, parseICO };
-
-export default ICO;
+module.exports = ICO;

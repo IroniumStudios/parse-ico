@@ -1,71 +1,70 @@
 {
-  "name": "icojs",
-  "description": "parse ico file",
-  "version": "0.19.3",
-  "author": "egy186",
+  "name": "parse-ico",
+  "description": "parse ico files and convert .pngs to .ico files",
+  "version": "1.0.1",
+  "author": "Damon Smith <<cleverdamontoutube@gmail.com>>",
   "browser": "browser.js",
-  "bugs": {
-    "url": "https://github.com/egy186/icojs/issues"
+  "discussion": {
+    "url": "https://github.com/IroniumStudios/parse-ico/discussions"
   },
   "dependencies": {
-    "@jimp/bmp": "^0.22.12",
+    "bmp-js": "0.1.0",
     "decode-ico": "^0.4.1",
-    "file-type": "^19.0.0",
+    "file-type": "^16.5.4",
     "jpeg-js": "^0.4.4",
     "pngjs": "^7.0.0",
-    "to-data-view": "^2.0.0"
+    "to-data-view": "^1.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.0",
-    "@babel/preset-env": "^7.24.0",
-    "@egy186/eslint-config": "^0.110.0",
-    "@playwright/test": "^1.42.0",
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@egy186/eslint-config": "^0.100.0",
+    "@playwright/test": "^1.40.0",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
-    "c8": "^9.1.0",
-    "chai": "^5.1.0",
+    "@stylistic/eslint-plugin": "^1.4.1",
+    "babel-plugin-transform-async-to-promises": "^0.8.18",
+    "chai": "^4.3.10",
     "chai-as-promised": "^7.0.0",
-    "data-uri-to-buffer": "^6.0.1",
+    "data-uri-to-buffer": "^3.0.0",
     "ejs": "^3.1.7",
-    "eslint": "^8.57.0",
+    "eslint": "^8.54.0",
+    "eslint-plugin-jsdoc": "^46.9.0",
+    "eslint-plugin-n": "^16.3.1",
+    "file-url": "^3.0.0",
     "jsdoc-to-markdown": "^8.0.0",
     "jsonfile": "^6.1.0",
-    "marked": "^12.0.0",
-    "mocha": "^10.3.0",
+    "marked": "^11.0.0",
+    "mocha": "^10.2.0",
+    "nyc": "^15.0.0",
     "pixelmatch": "^5.3.0",
-    "playwright": "^1.42.0",
+    "playwright": "^1.40.0",
     "rimraf": "^5.0.1",
-    "rollup": "^4.13.0"
+    "rollup": "^4.6.0"
   },
   "engines": {
     "node": ">=18.17.1"
   },
-  "exports": {
-    ".": {
-      "default": "./src/node/index.js",
-      "types": "./types/index.d.ts"
-    },
-    "./browser": {
-      "default": "./src/browser/index.js",
-      "types": "./types/index.d.ts"
-    }
-  },
   "files": [
     "dist",
     "src",
-    "types"
+    "browser.js",
+    "index.js",
+    "index.d.ts",
+    "browser.d.ts"
   ],
-  "homepage": "https://egy186.github.io/icojs",
+  "homepage": "https://github.com/IroniumStudios/parse-ico",
   "keywords": [
     "ico",
     "parse"
   ],
   "license": "MIT",
+  "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/egy186/icojs.git"
+    "url": "git+https://github.com/IroniumStudios/parse-ico.git"
   },
   "scripts": {
     "build": "rollup --config rollup.config.js",
@@ -78,9 +77,7 @@
     "pretest:browser": "playwright install",
     "test": "npm run test:node && npm run test:browser",
     "test:browser": "playwright test",
-    "test:node": "c8 --reporter lcov --reporter text-summary --report-dir coverage mocha \"test/node/*.spec.js\"",
+    "test:node": "nyc --reporter lcov --reporter text-summary --report-dir coverage mocha \"test/node/*.spec.js\"",
     "version": "npm run docs && git add docs/index.html README.md"
-  },
-  "type": "module",
-  "types": "./types/index.d.ts"
+  }
 }

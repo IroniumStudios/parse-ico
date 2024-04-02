@@ -1,16 +1,19 @@
-import { readFile, writeFile } from 'node:fs/promises';
-import jsonfile from 'jsonfile';
-import { marked } from 'marked';
-import { render } from 'ejs';
+'use strict';
+
+const fs = require('fs/promises');
+const jsonfile = require('jsonfile');
+const { marked } = require('marked');
+const path = require('path');
+const { render } = require('ejs');
 
 const generateDocs = async () => {
   const markdown = {
-    api: await readFile(new URL('../templates/api.md', import.meta.url), 'utf-8'),
-    demo: await readFile(new URL('../templates/demo.md', import.meta.url), 'utf-8'),
-    example: await readFile(new URL('../templates/example.md', import.meta.url), 'utf-8'),
-    foot: await readFile(new URL('../templates/foot.md', import.meta.url), 'utf-8'),
-    head: await readFile(new URL('../templates/head.md', import.meta.url), 'utf-8'),
-    install: await readFile(new URL('../templates/install.md', import.meta.url), 'utf-8')
+    api: await fs.readFile(path.resolve(__dirname, '../templates/api.md'), 'utf-8'),
+    demo: await fs.readFile(path.resolve(__dirname, '../templates/demo.md'), 'utf-8'),
+    example: await fs.readFile(path.resolve(__dirname, '../templates/example.md'), 'utf-8'),
+    foot: await fs.readFile(path.resolve(__dirname, '../templates/foot.md'), 'utf-8'),
+    head: await fs.readFile(path.resolve(__dirname, '../templates/head.md'), 'utf-8'),
+    install: await fs.readFile(path.resolve(__dirname, '../templates/install.md'), 'utf-8')
   };
 
   // Generate README.md
@@ -22,11 +25,11 @@ const generateDocs = async () => {
     markdown.api,
     markdown.foot
   ].join('\n');
-  await writeFile(new URL('../README.md', import.meta.url), md, 'utf-8');
+  await fs.writeFile(path.resolve(__dirname, '../README.md'), md, 'utf-8');
 
   // Generate docs/index.html
-  const template = await readFile(new URL('../templates/index.ejs', import.meta.url), 'utf-8');
-  const { version } = await jsonfile.readFile(new URL('../package.json', import.meta.url));
+  const template = await fs.readFile(path.resolve(__dirname, '../templates/index.ejs'), 'utf-8');
+  const { version } = await jsonfile.readFile(path.resolve(__dirname, '../package.json'));
   const html = render(template, {
     docs: {
       api: marked.parse(markdown.api),
@@ -35,7 +38,7 @@ const generateDocs = async () => {
     },
     version
   });
-  await writeFile(new URL('../docs/index.html', import.meta.url), html, 'utf-8');
+  await fs.writeFile(path.resolve(__dirname, '../docs/index.html'), html, 'utf-8');
 };
 
 generateDocs().catch(err => {

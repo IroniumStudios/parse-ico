@@ -1,4 +1,6 @@
-import { devices } from '@playwright/test';
+'use strict';
+
+const { devices } = require('@playwright/test');
 
 const config = {
   projects: [
@@ -20,4 +22,4 @@ const config = {
   testDir: 'test/browser'
 };
 
-export default config;
+module.exports = config;

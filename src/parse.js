@@ -1,5 +1,7 @@
-import { MIME_PNG } from './mime.js';
-import decodeIco from 'decode-ico';
+'use strict';
+
+const decodeIco = require('decode-ico');
+const { MIME_PNG } = require('./mime');
 
 /**
  * @typedef {object} ParsedImage
@@ -47,6 +49,4 @@ const parse = async (data, mime, Image) => {
   return parsedImages;
 };
 
-export { parse };
-
-export default parse;
+module.exports = parse;

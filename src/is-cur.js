@@ -1,4 +1,6 @@
-import toDataView from 'to-data-view';
+'use strict';
+
+const toDataView = require('to-data-view');
 
 /**
  * Check the ArrayBuffer is valid CUR.
@@ -12,6 +14,4 @@ const isCUR = source => {
   return dataView.getUint16(0, true) === 0 && dataView.getUint16(2, true) === 2;
 };
 
-export { isCUR };
-
-export default isCUR;
+module.exports = isCUR;

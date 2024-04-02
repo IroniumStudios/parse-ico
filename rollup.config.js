@@ -1,14 +1,16 @@
-import { babel } from '@rollup/plugin-babel';
-import commonjs from '@rollup/plugin-commonjs';
-import jsonfile from 'jsonfile';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import terser from '@rollup/plugin-terser';
+'use strict';
+
+const { babel } = require('@rollup/plugin-babel');
+const commonjs = require('@rollup/plugin-commonjs');
+const jsonfile = require('jsonfile');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const terser = require('@rollup/plugin-terser');
 
 const banner = async () => {
   const { version } = await jsonfile.readFile('./package.json');
   return `/*!
- * icojs v${version}
- * (c) egy186
+ * parse-ico v${version}
+ * (c) Damon Smith <<cleverdamontoutube@gmail.com>>
  * https://github.com/egy186/icojs/blob/main/LICENSE
  */`;
 };
@@ -21,7 +23,6 @@ const config = {
   },
   output: {
     banner,
-    exports: 'named',
     file: 'dist/ico.js',
     format: 'umd',
     name: 'ICO',
@@ -37,4 +38,4 @@ const config = {
   strictDeprecations: true
 };
 
-export default config;
+module.exports = config;

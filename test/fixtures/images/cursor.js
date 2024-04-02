@@ -1,4 +1,6 @@
-const cursor = [
+'use strict';
+
+module.exports = [
   {
     hotspot: {
       x: 2,
@@ -12,5 +14,3 @@ const cursor = [
     }
   }
 ];
-
-export default cursor;

@@ -1,3 +1,5 @@
+'use strict';
+
 const split = colors => colors.split('|').map(color => color.split(',').map(s => parseInt(s, 10)));
 
 const basic = [
@@ -66,7 +68,7 @@ const basic = [
   }
 ];
 
-export default basic.map(bmpObject => ({
+module.exports = basic.map(bmpObject => ({
   ...bmpObject,
   and: Buffer.from(bmpObject.and, 'base64'),
   colors: Array.isArray(bmpObject.colors) ? bmpObject.colors : split(bmpObject.colors),
