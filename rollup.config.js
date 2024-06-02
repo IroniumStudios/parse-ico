@@ -11,7 +11,7 @@ const banner = async () => {
   return `/*!
  * parse-ico v${version}
  * (c) Damon Smith <<cleverdamontoutube@gmail.com>>
- * https://github.com/egy186/icojs/blob/main/LICENSE
+ * https://github.com/egy186/parse-ico/blob/main/LICENSE
  */`;
 };
 

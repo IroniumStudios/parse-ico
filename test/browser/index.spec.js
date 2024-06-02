@@ -32,7 +32,7 @@ test.describe('ICO.parse in the browser', () => {
 
       await Promise.all(images.map(async (image, index) => {
         const expected = `${icon.slice(0, icon.lastIndexOf('.'))}/${image.name}.png`;
-        // Skip basic.ico[6], ref: https://github.com/egy186/icojs/pull/106
+        // Skip basic.ico[6], ref: https://github.com/egy186/parse-ico/pull/106
         if (icon === 'basic.ico' && index === 6) {
           return;
         }

@@ -1,7 +1,7 @@
 {
   "name": "parse-ico",
   "description": "parse ico files and convert .pngs to .ico files",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Damon Smith <<cleverdamontoutube@gmail.com>>",
   "browser": "browser.js",
   "discussion": {

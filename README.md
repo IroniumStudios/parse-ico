@@ -3,7 +3,7 @@
 A JavaScript library to use ICO.
 Works on both Node.js and the browser.
 
-NOTE: This package is a fork of icojs.
+NOTE: This package is a fork of parse-ico.
 
 ## Install
 
